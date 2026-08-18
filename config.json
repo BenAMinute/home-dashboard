@@ -42,7 +42,11 @@
       "defaultProtocol": "http",
       "enabled": true,
       "pinned": true,
-      "order": 2
+      "order": 2,
+      "customIp": "192.168.0.108",
+      "customPort": 8096,
+      "customPath": "/",
+      "customProtocol": "http"
     },
     {
       "id": "navidrome",
@@ -57,7 +61,11 @@
       "defaultProtocol": "http",
       "enabled": true,
       "pinned": true,
-      "order": 3
+      "order": 3,
+      "customIp": "192.168.0.100",
+      "customPort": 4533,
+      "customPath": "/",
+      "customProtocol": "http"
     },
     {
       "id": "sonarr",
@@ -72,7 +80,11 @@
       "defaultProtocol": "http",
       "enabled": true,
       "pinned": true,
-      "order": 4
+      "order": 4,
+      "customIp": "192.168.0.108",
+      "customPort": 8989,
+      "customPath": "/",
+      "customProtocol": "http"
     },
     {
       "id": "radarr",
@@ -87,7 +99,11 @@
       "defaultProtocol": "http",
       "enabled": true,
       "pinned": true,
-      "order": 5
+      "order": 5,
+      "customIp": "192.168.0.108",
+      "customPort": 7878,
+      "customPath": "/",
+      "customProtocol": "http"
     },
     {
       "id": "qbittorrent",
@@ -102,7 +118,11 @@
       "defaultProtocol": "http",
       "enabled": true,
       "pinned": true,
-      "order": 6
+      "order": 6,
+      "customIp": "192.168.0.108",
+      "customPort": 8080,
+      "customPath": "/",
+      "customProtocol": "http"
     },
     {
       "id": "pinchflat",
@@ -117,7 +137,11 @@
       "defaultProtocol": "http",
       "enabled": true,
       "pinned": false,
-      "order": 7
+      "order": 7,
+      "customIp": "192.168.0.100",
+      "customPort": 8945,
+      "customPath": "/",
+      "customProtocol": "http"
     },
     {
       "id": "planka",
@@ -132,7 +156,49 @@
       "defaultProtocol": "http",
       "enabled": true,
       "pinned": false,
-      "order": 8
+      "order": 8,
+      "customIp": "192.168.0.103",
+      "customPort": 3000,
+      "customPath": "/",
+      "customProtocol": "http"
+    },
+    {
+      "id": "custom-1786833874066",
+      "name": "Jackett",
+      "category": "custom",
+      "description": "Custom Homelab Container Service",
+      "icon": "server",
+      "brandColor": "#3b82f6",
+      "bgGradient": "linear-gradient(135deg, #3b82f633 0%, #3b82f60d 100%)",
+      "defaultPort": 9117,
+      "defaultPath": "/",
+      "defaultProtocol": "http",
+      "customIp": "192.168.0.108",
+      "customPort": 9117,
+      "customPath": "/",
+      "customProtocol": "http",
+      "enabled": true,
+      "pinned": false,
+      "order": 1786833874066
+    },
+    {
+      "id": "custom-1786842799602",
+      "name": "Prowlarr",
+      "category": "custom",
+      "description": "Custom Homelab Container Service",
+      "icon": "tv",
+      "brandColor": "#3b82f6",
+      "bgGradient": "linear-gradient(135deg, #3b82f633 0%, #3b82f60d 100%)",
+      "defaultPort": 9696,
+      "defaultPath": "/",
+      "defaultProtocol": "http",
+      "customIp": "192.168.0.108",
+      "customPort": 9696,
+      "customPath": "/",
+      "customProtocol": "http",
+      "enabled": true,
+      "pinned": false,
+      "order": 1786842799602
     }
   ]
 }
