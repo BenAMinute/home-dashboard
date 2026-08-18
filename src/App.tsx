@@ -25,6 +25,8 @@ const STORAGE_KEY_CONFIG = 'homelab_dashboard_config_v1';
 const STORAGE_KEY_SERVICES = 'homelab_dashboard_services_v1';
 
 export const App: React.FC = () => {
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+
   // Load initial global config
   const [config, setConfig] = useState<GlobalConfig>(() => {
     try {
@@ -51,6 +53,29 @@ export const App: React.FC = () => {
     }
   });
 
+  // Fetch config.json from server on mount so all devices (phones, laptops) stay in sync
+  useEffect(() => {
+    fetch('/api/config')
+      .then((res) => {
+        if (!res.ok) throw new Error('Config API response not OK');
+        return res.json();
+      })
+      .then((data) => {
+        if (data && data.config) {
+          setConfig(data.config);
+        }
+        if (data && Array.isArray(data.services) && data.services.length > 0) {
+          setServices(data.services);
+        }
+      })
+      .catch((err) => {
+        console.warn('Using local fallback state, server config fetch failed:', err);
+      })
+      .finally(() => {
+        setIsLoaded(true);
+      });
+  }, []);
+
   // Filter & Search states
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [selectedCategory, setSelectedCategory] = useState<ServiceCategory>('all');
@@ -64,15 +89,19 @@ export const App: React.FC = () => {
   const [isAddServiceOpen, setIsAddServiceOpen] = useState<boolean>(false);
   const [editingService, setEditingService] = useState<ServiceItem | null>(null);
 
-  // Sync config to localStorage
+  // Save config & services to server & localStorage whenever state changes
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY_CONFIG, JSON.stringify(config));
-  }, [config]);
+    if (!isLoaded) return;
 
-  // Sync services to localStorage
-  useEffect(() => {
+    localStorage.setItem(STORAGE_KEY_CONFIG, JSON.stringify(config));
     localStorage.setItem(STORAGE_KEY_SERVICES, JSON.stringify(services));
-  }, [services]);
+
+    fetch('/api/config', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ config, services }),
+    }).catch((err) => console.error('Failed to sync configuration to server:', err));
+  }, [config, services, isLoaded]);
 
   // Ping check implementation
   const pingSingleService = useCallback(async (service: ServiceItem) => {
